@@ -1,0 +1,10 @@
+.grid{
+    display: flex;
+    flex-wrap: wrap;
+}
+.childGrid{
+    margin: 0em;
+    border: 10px black;
+    flex: 1 0 6.25%;
+    background-color: red;
+}

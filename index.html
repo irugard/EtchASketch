@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+</body>
+<script>
+    const gridContainer = document.createElement("div").className("grid");
+    const square = document.createElement("div").className("childGrid");
+    let i = 1;
+    while(i<(16*16 + 1)){
+        gridContainer.appendChild("square");
+    }
+    document.body.appendChild(gridContainer);
+
+</script>
