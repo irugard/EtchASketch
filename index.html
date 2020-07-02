@@ -4,14 +4,50 @@
 </head>
 <body>
 
+    <div id="grid">
+        <button onclick="newPad()">Select your sketchpad.</button>
+    </div>
+
 </body>
+
 <script>
-    const gridContainer = document.createElement("div").className("grid");
-    const square = document.createElement("div").className("childGrid");
+        
+    const gridContainer = document.querySelector("div");
+    console.log(gridContainer);
     let i = 1;
-    while(i<(16*16 + 1)){
-        gridContainer.appendChild("square");
+    while(i<(257)){
+        const square = document.createElement("div");
+        //square.innerHTML = i;
+        square.className = "childGrid";
+        square.onmouseover = () => {
+            square.style.backgroundColor = "white";
+        }
+        gridContainer.appendChild(square);
+        i++;
     }
     document.body.appendChild(gridContainer);
+
+    const newPad = () => {
+        const col = prompt("enter the number of columns for your sketchpad");
+        const rows = prompt("enter the number of rows for your sketchpad");
+        const squares = col * rows;
+        let i = 0;
+        const gridContainer = document.querySelector("#grid");
+        const newGridContainer = document.createElement("div");
+        newGridContainer.setAttribute("id","grid");
+        while(i<squares){
+            const square = document.createElement("div");
+            //square.innerHTML = i;
+            square.className = "childGrid";
+            square.onmouseover = () => {
+                square.style.backgroundColor = "white";
+            }
+            newGridContainer.appendChild(square);
+            i++;
+        }
+        document.body.replaceChild(newGridContainer, gridContainer);
+        
+    }
+
 
 </script>
