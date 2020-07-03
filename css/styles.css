@@ -1,14 +1,9 @@
-#grid{
+.grid{
     display: flex;
     flex-wrap: wrap;;
     height: 100vh;
 }
 .childGrid{
     margin: 0em;
-    flex: 1 0 6.25%;
     background-color: black;
-    height: 6.25vw;
-}
-.childGrid:hover{
-    background-image: linear-gradient(magenta, yellow);
 }

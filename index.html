@@ -3,51 +3,71 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+    <button onclick="newPad()">Select your sketchpad.</button>
 
-    <div id="grid">
-        <button onclick="newPad()">Select your sketchpad.</button>
+    <div class="grid">
+        
     </div>
 
 </body>
 
 <script>
-        
-    const gridContainer = document.querySelector("div");
-    console.log(gridContainer);
-    let i = 1;
-    while(i<(257)){
-        const square = document.createElement("div");
-        //square.innerHTML = i;
-        square.className = "childGrid";
-        square.onmouseover = () => {
-            square.style.backgroundColor = "white";
-        }
-        gridContainer.appendChild(square);
-        i++;
+    
+    let darken = (colour) => {
+        switch(colour){
+            case "white": return "rgba(0,0,0,0.1)";
+            case "rgba(0, 0, 0, 0.1)": return "rgba(0,0,0,0.2)";
+            case "rgba(0, 0, 0, 0.2)": return "rgba(0,0,0,0.3)";
+            case "rgba(0, 0, 0, 0.3)": return "rgba(0,0,0,0.4)";
+            case "rgba(0, 0, 0, 0.4)": return "rgba(0,0,0,0.5)";
+            case "rgba(0, 0, 0, 0.5)": return "rgba(0,0,0,0.6)";
+            case "rgba(0, 0, 0, 0.6)": return "rgba(0,0,0,0.7)";
+            case "rgba(0, 0, 0, 0.7)": return "rgba(0,0,0,0.8)";
+            case "rgba(0, 0, 0, 0.8)": return "rgba(0,0,0,0.9)";
+            case "rgba(0, 0, 0, 0.9)": return "rgb(0,0,0)";
+            default: return "white";
+        }     
     }
+
+    const createSquares = (numberOfCol, numberOfRows, gridContainer) => {
+        let i = 0;
+        const size = 100/numberOfCol;
+        while (i < numberOfCol*numberOfRows){
+            const square = document.createElement("div");
+            square.className = "childGrid";
+            square.style.flex = `1 0 ${size}%`;
+            square.style.height = `${size}vw`;
+            square.onmouseover = () => {
+                square.style.backgroundColor =  darken(square.style.backgroundColor);
+            }
+            gridContainer.appendChild(square);
+            i++;
+        }
+    }
+
+    const gridContainer = document.querySelector("div");
+    createSquares(16,16, gridContainer);
     document.body.appendChild(gridContainer);
 
     const newPad = () => {
-        const col = prompt("enter the number of columns for your sketchpad");
-        const rows = prompt("enter the number of rows for your sketchpad");
-        const squares = col * rows;
-        let i = 0;
-        const gridContainer = document.querySelector("#grid");
-        const newGridContainer = document.createElement("div");
-        newGridContainer.setAttribute("id","grid");
-        while(i<squares){
-            const square = document.createElement("div");
-            //square.innerHTML = i;
-            square.className = "childGrid";
-            square.onmouseover = () => {
-                square.style.backgroundColor = "white";
+        while(true){
+            col = prompt("please enter a valid positive integer to select the number of columns for your sketchpad");
+            if(Number.isSafeInteger(parseInt(col)) && parseInt(col) > 0){
+                break;
             }
-            newGridContainer.appendChild(square);
-            i++;
         }
+        while(true){
+            rows = prompt("please enter a valid positive integer to select the number of row for your sketchpad");
+            if(Number.isSafeInteger(parseInt(rows)) && parseInt(rows) > 0){
+                break;
+            }
+        }
+        const gridContainer = document.querySelector(".grid");
+        console.log(gridContainer);
+        const newGridContainer = document.createElement("div");
+        newGridContainer.className = "grid";
+        createSquares(col,rows,newGridContainer);        
         document.body.replaceChild(newGridContainer, gridContainer);
-        
     }
-
 
 </script>
